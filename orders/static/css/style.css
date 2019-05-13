@@ -1,0 +1,129 @@
+﻿@charset 'utf-8';
+
+* {
+    margin: 0 auto;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.panel-sidebar {
+	width: 100%;
+	max-width: 300px;
+	float: left;
+}
+
+.panel-content {
+	width: calc(100% - 300px);
+	float:  right;
+}
+
+.panel-sidebar .nav-link {
+	display: block;
+	width: 100%;
+}
+
+.list-group-item {
+	width: 100%;
+	padding: 5px 4px;
+}
+
+span.helptext {
+    font-size: 12px;
+    color: green;
+    font-weight: bold;
+}
+
+tr.red {
+    background: #e5cfcf;
+}
+
+tr.green {
+    background: #9ae5db;
+}
+
+
+.starrating > input {display: none;}  /* Remove radio buttons */
+
+.starrating > label:before { 
+  content: "\f005"; /* Star */
+  margin: 2px;
+  font-size: 1em;
+  font-family: FontAwesome;
+  display: inline-block; 
+}
+
+.starrating > label
+{
+  color: #222222; /* Start color when not clicked */
+}
+
+.starrating > input:checked ~ label
+{ color: #ffca08 ; } /* Set yellow color when star checked */
+
+
+li.order {
+  display: block;
+  list-style: none;
+  /* width: 100%; */
+  background: #e9ecef;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 2px;
+}
+
+span.order-item {
+  display: block;
+  margin: 10px;
+  background: #e9ecef;
+}
+
+span.rate-view {
+  font-size: 70px;
+  font-weight: bold;
+  background: #FFC107;
+  color: #123112;
+  padding: 10px;
+  border-radius: 20px;
+  display: block;
+}
+
+.rate {
+  width: 130px;
+  float: left;
+}
+
+form.add-to-cart {
+  width: 300px;
+  background: #e9ecef;
+  padding: 20px;
+  margin: 0 auto;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+img.card-img-top {
+  height: 180px;
+  /* width: 288px; */
+}
+
+.card {
+  height: 290px;
+}
+
+h5.card-title {
+  height: 48px;
+  display: block;
+  font-size: 17px !important;
+}
+
+.card-body {
+  text-align: center;
+}
+
+.card {
+  height: 315px;
+  background: #f8f9fa;
+}

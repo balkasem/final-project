@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<div class="continer">
+    {% if message is not None or  items.length == 0%}
+    <h1>
+        {{message}}
+    </h1>
+    {% endif %}
+</div>
+
+{% if message is None %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>You'r items is listed here</h1>
+            <ul class="list-group">
+                {% for item in items %}
+                <li class="list-group-item">
+                    <span>{{item.menuItemName}}</span>
+                    <span>{{item.price}}</span>
+                    <span class="float-right">
+                        <a href='/delete-item/{{order.id}}/{{item.id}}'>
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </a>
+                    </span>
+                </li>
+                {% endfor %}
+                <li class="list-group-item">
+                    <strong>Total: </strong> {{total}}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <form action="/confirm-order" method="POST">
+                {% csrf_token %}
+                <input type="hidden" value="{{order.id}}" name="order_id" />
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Address</label>
+                    <textarea class="form-control" name='address' id="exampleFormControlTextarea1" rows="3" required></textarea>
+                    <small class="form-text text-muted">enter your address here.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Name</label>
+                    <input type="text" class="form-control" name='name' required/>
+                    <small class="form-text text-muted">enter your Name here.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Phone Number</label>
+                    <input class="form-control" name='phone' required type='tel' pattern='[0-9]{11}' title="please enter correct phone number. 0XXXXXXXXXX"/>
+                    <small class="form-text text-muted">enter your Phone here.</small>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Confirm order</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %}
+<br />
+<br />
+{% endblock %}

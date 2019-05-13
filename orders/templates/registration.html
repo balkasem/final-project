@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block body %}
+<div class="container">
+  <div class="jumbotron">
+    {% if registered %}
+      <h1>Thank you for registering!</h1>
+    {% else %}
+    <form enctype="multipart/form-data" method="POST">
+      {% csrf_token %}
+      {{ user_form.as_p }}
+      {{ profile_form.as_p }}
+
+      <p>
+        <span>
+          Please select your registeration type
+        </span>
+        <br />
+        <input type="radio" name='user_type' value="normal" id='user_type_normal' checked/> <label for="user_type_normal">Customer</label>
+        <input type="radio" name='user_type' value="provider" id='user_type_provider'/> <label for="user_type_provider">Family User</label>
+      </p>
+      <input type="submit" name="" value="Register">
+
+    </form>
+
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

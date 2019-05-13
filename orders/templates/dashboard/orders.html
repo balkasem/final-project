@@ -1,0 +1,92 @@
+{% extends '../base.html' %}
+{% block body %}
+<div class="container">
+    <div class="jumbotron">
+        <h1>Current Order</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Items</th>
+                    <th scope="col">price</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Phone</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>
+                        <ul style="list-style:none;">
+                            {% for item in order.orderItems.all %}
+                            <li>
+                                {{item.menuItemName}}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>{{order.totalPrice}}</td>
+                    <td>{{order.address}}</td>
+                    <td>{{order.name}}</td>
+                    <td>{{order.phone}}</td>
+                    <td>
+                        <span class="float-right">
+                            <a onClick='return confirm("are you sure you want to accept the order?")' href='/dashboard-accept-order/{{order.id}}'>
+                                <button type="button" class="btn btn-primary">Accept</button>
+                            </a>
+                        </span>
+
+                        <span class="float-right">
+                            <a onClick='return confirm("are you sure you want to reject the order?")' href='/dashboard-reject-order/{{order.id}}'>
+                                <button type="button" class="btn btn-danger" style="margin-right:10px;">Reject</button>
+                            </a>
+                        </span>
+
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br />
+        <h1>Old Orders</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Items</th>
+                    <th scope="col">price</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Phone</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in pastOrders %}
+                <tr class="{% if order.isRejected %}red{%else%}green{% endif %}">
+                    <td>
+                        <ul style="list-style:none;">
+                            {% for item in order.orderItems.all %}
+                            <li>
+                                {{item.menuItemName}} -- {{item.price}}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>{{order.totalPrice}}</td>
+                    <td>{{order.address}}</td>
+                    <td>{{order.name}}</td>
+                    <td>{{order.phone}}</td>
+                    <td>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<br />
+<br />
+{% endblock %}

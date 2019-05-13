@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+Food Truck
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <form action="/add-to-card/{{menuItem.id}}/" method="POST" class="add-to-cart">
+        {% csrf_token %}
+
+        <big>
+            <div class="form-group">
+                <b>Item Name: </b> {{menuItem.name}}
+            </div>
+
+            <div class="form-group">
+                <b>Price: </b>{{menuItem.price}}
+            </div>
+
+            <div class="form-group">
+                <span><b>Family:</b> </span> {{menuItem.user.profile.name}}
+            </div>
+        </big>
+
+        <button type="submit" class="btn btn-primary">Add to my cart</button>
+    </form>
+</div>
+{% endblock %}

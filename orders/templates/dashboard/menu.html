@@ -1,0 +1,63 @@
+{% extends '../base.html' %}
+{% block body %}
+<div class="container">
+    <div class="jumbotron">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Desc</th>
+                    <th scope="col">Price</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for menuItem in menuItems %}
+                <tr>
+                    <td>{{menuItem.name}}</td>
+                    <td>{{menuItem.desc}}</td>
+                    <td>{{menuItem.price}}</td>
+                    <td>
+                        <span class="float-right">
+                            <a onClick='return confirm("are you sure?")' href='/delete-menu-item/{{menuItem.id}}'>
+                                <button type="button" class="btn btn-danger">Delete</button>
+                            </a>
+                        </span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <hr />
+
+        <h3 style="text-align:center;">
+            Add new item
+        </h3>
+        <form class="col-md-6 col-xs-12" method="post" action="/dashboard/add-new-item">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp"
+                    placeholder="Enter Name" required/>
+                <small class="form-text text-muted">please enter name of your meal</small>
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="number" class="form-control" id="price" name="price" placeholder="Price" required />
+                <small class="form-text text-muted">please enter price</small>
+            </div>
+
+            <div class="form-group">
+                <label for="desc"></label>
+                <textarea row="10" class="form-control" id="desc" name="desc" placeholder="Food Info" required></textarea>
+                <small class="form-text text-muted">please explain your food</small>
+            </div>
+            <button type="submit" class="btn btn-primary">Add New One</button>
+        </form>
+    </div>
+</div>
+
+<br />
+<br />
+{% endblock %}

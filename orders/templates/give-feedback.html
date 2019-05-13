@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}
+Error
+{% endblock %}
+
+{% block body %}
+<h1 style="text-align:center">Give Feedback</h1>
+
+<ul>
+    {% for order in orders %}
+    <li class="order">
+        <b>Family:</b>
+        {{order.sellerUser.profile.name}}
+
+        {% for item in order.orderItems.all %}
+        <span class="order-item"><b>Item name: </b>{{item.menuItemName}}</span>
+        {% endfor %}
+        <form method="POST" action="/give-feedback" style="margin: 10px;">
+            {% csrf_token %}
+            <input type="hidden" name="orderId" value="{{order.id}}" />
+            <div class="input-group">
+                <select class="custom-select" id="inputGroupSelect04" name="rate">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                </select>
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Send review</button>
+                </div>
+            </div>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

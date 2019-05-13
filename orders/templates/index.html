@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}
+Food Truck
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-12">
+        <p class="h2 text-center mb-3"> Family's Menus </p>
+        <small style="text-align:center; display:block">You can see menu and select from Family's Menu</small>
+        <div class="row">
+            <div class="col-12">
+                {% for item in items%}
+                    {% if item.profile.id %}
+                        <div class="card" style="width: 15rem; float: left; margin: 10px">
+                            <img class="card-img-top" src="{{item.profile.imagePath}}" alt="Card image cap">   
+                            <div class="card-body">
+                                <h5 class="card-title" style="text-align:center">{{item.profile.name}}</h5>
+                                <a class="btn btn-primary" href="/profile/{{item.profile.id}}">View Menu</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endblock %}

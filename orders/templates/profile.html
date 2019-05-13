@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}
+Food Truck
+{% endblock %}
+
+{% block body %}
+
+<br />
+<br />
+<br />
+<div class="continer">
+    <div class="row">
+        <div class="col-8">
+            <div class="table-responsive">
+                <table class="table table-striped mb-3">
+                    <tbody>
+                        <tr>
+                            <th colspan="1">Item Name</th>
+                            <th>Price</th>
+                            <td></td>
+                        </tr>
+                        {% for menuItem in menuItems %}
+                        <tr>
+                            <td>
+                                <a href="/profile/{{menuItem.user.profile.id}}">
+                                    {{menuItem.name}}
+                                </a>
+                            </td>
+                            <td>{{menuItem.price}}</td>
+                            <td>
+                                {% if user.is_authenticated %}
+                                <a href="/add-to-card/{{menuItem.id}}">
+                                    <button type="button" class="btn btn-primary">+Add this item to cart</button>
+                                </a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="rate">
+                        <span class="rate-view">{{profile.rate}}</span>
+                        <span class="rate-count">From ({{reviewCount}} Reviwes)</span>
+                    </div>
+
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <h2>{{profile.name}}</h2>
+                    <h2>{{profile.address}}</h2>
+                    <h3>{{profile.tell}}</h3>
+                    <p>
+                        {{profile.bio}}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
